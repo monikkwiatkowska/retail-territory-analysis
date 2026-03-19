@@ -49,7 +49,7 @@ ORDER BY avg_margin DESC
 | Arkansas | 37.95% | 60 |
 | South Dakota | 37.75% | 12 |
 
-💡 **Insight:** Highest margin states are all low volume — suggesting untapped growth potential in profitable markets.
+**Insight:** Highest margin states are all low volume — suggesting untapped growth potential in profitable markets.
 
 ---
 
@@ -74,7 +74,7 @@ ORDER BY low_margin_orders DESC
 | Illinois | 310 |
 | Ohio | 257 |
 
-💡 **Insight:** Texas alone accounts for 585 low margin orders — nearly double California. These are high volume states where pricing or shipping costs are severely eroding profitability.
+**Insight:** Texas alone accounts for 585 low margin orders — nearly double California. These are high volume states where pricing or shipping costs are severely eroding profitability.
 
 ---
 
