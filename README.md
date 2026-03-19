@@ -100,7 +100,7 @@ ORDER BY total_profit DESC
 | Michigan | $76,269 | $24,463 | 33.34% |
 | Indiana | $53,555 | $18,382 | 34.79% |
 
-💡 **Insight:** California and New York generate the most revenue but have the lowest margins among top states. Indiana and Georgia show healthier margin profiles despite lower revenue.
+**Insight:** California and New York generate the most revenue but have the lowest margins among top states. Indiana and Georgia show healthier margin profiles despite lower revenue.
 
 ---
 
@@ -119,7 +119,7 @@ ORDER BY total_sales DESC
 LIMIT 10
 ```
 
-💡 **Insight:** This combined view reveals the full picture — allowing direct comparison of revenue, profitability and margin risk side by side across all territories.
+**Insight:** This combined view reveals the full picture — allowing direct comparison of revenue, profitability and margin risk side by side across all territories.
 
 ---
 
