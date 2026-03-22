@@ -141,6 +141,9 @@ LIMIT 10
 
 ---
 
+**Tableau**
+https://public.tableau.com/views/RetailTerritoryMarginAnalysis/RetailTerritoryPerformanceAnalysis?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
 ## Files
 
 - `retail_shipping_sample.csv` — merged dataset (9,995 rows)
