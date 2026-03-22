@@ -29,7 +29,7 @@
 
 ## SQL Queries & Findings
 
-### Query 1 — Average margin by state
+### Average margin by state
 
 ```sql
 SELECT State, 
@@ -53,7 +53,7 @@ ORDER BY avg_margin DESC
 
 ---
 
-### Query 2 — Low margin orders by state (below 10%)
+### Low margin orders by state (below 10%)
 
 ```sql
 SELECT State,
@@ -78,7 +78,7 @@ ORDER BY low_margin_orders DESC
 
 ---
 
-### Query 3 — Total sales, profit and margin by state
+### Total sales, profit and margin by state
 
 ```sql
 SELECT State,
@@ -104,7 +104,7 @@ ORDER BY total_profit DESC
 
 ---
 
-### Query 4 — Full territory overview
+### Full territory overview
 
 ```sql
 SELECT State,
@@ -117,6 +117,31 @@ FROM retail
 GROUP BY State
 ORDER BY total_sales DESC
 LIMIT 10
+```
+
+### Territory performance (grouped regions)
+```sql
+SELECT 
+  CASE 
+    WHEN State IN ('California','Oregon','Washington',
+    'Nevada','Arizona') THEN 'West'
+    WHEN State IN ('Texas','Oklahoma','Kansas','Missouri',
+    'Arkansas','Louisiana') THEN 'Central'
+    WHEN State IN ('New York','Pennsylvania','New Jersey',
+    'Massachusetts','Virginia','Florida','Georgia',
+    'North Carolina') THEN 'East'
+    ELSE 'Other'
+  END AS Territory,
+  ROUND(SUM(Sales), 2) AS total_sales,
+  ROUND(SUM(Profit), 2) AS total_profit,
+  ROUND(AVG(Net_Margin_pct), 2) AS avg_margin,
+  ROUND(AVG("Shipping Cost Per Unit"), 2) AS avg_shipping,
+  ROUND(AVG(CAST(Conversion_Flag AS FLOAT))*100, 2) 
+  AS conversion_pct,
+  COUNT("Order ID") AS total_orders
+FROM retail
+GROUP BY Territory
+ORDER BY total_profit DESC
 ```
 
 **Insight:** This combined view reveals the full picture — allowing direct comparison of revenue, profitability and margin risk side by side across all territories.
@@ -145,31 +170,6 @@ LIMIT 10
 [Tableau](https://public.tableau.com/views/RetailTerritoryMarginAnalysis/RetailTerritoryPerformanceAnalysis?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 ---
-
-### Territory performance (grouped regions)
-```sql
-SELECT 
-  CASE 
-    WHEN State IN ('California','Oregon','Washington',
-    'Nevada','Arizona') THEN 'West'
-    WHEN State IN ('Texas','Oklahoma','Kansas','Missouri',
-    'Arkansas','Louisiana') THEN 'Central'
-    WHEN State IN ('New York','Pennsylvania','New Jersey',
-    'Massachusetts','Virginia','Florida','Georgia',
-    'North Carolina') THEN 'East'
-    ELSE 'Other'
-  END AS Territory,
-  ROUND(SUM(Sales), 2) AS total_sales,
-  ROUND(SUM(Profit), 2) AS total_profit,
-  ROUND(AVG(Net_Margin_pct), 2) AS avg_margin,
-  ROUND(AVG("Shipping Cost Per Unit"), 2) AS avg_shipping,
-  ROUND(AVG(CAST(Conversion_Flag AS FLOAT))*100, 2) 
-  AS conversion_pct,
-  COUNT("Order ID") AS total_orders
-FROM retail
-GROUP BY Territory
-ORDER BY total_profit DESC
-```
 
 **Territory results:**
 
