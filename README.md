@@ -144,6 +144,96 @@ LIMIT 10
 **Tableau**
 [Tableau](https://public.tableau.com/views/RetailTerritoryMarginAnalysis/RetailTerritoryPerformanceAnalysis?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
+---
+
+### Territory performance (grouped regions)
+```sql
+SELECT 
+  CASE 
+    WHEN State IN ('California','Oregon','Washington',
+    'Nevada','Arizona') THEN 'West'
+    WHEN State IN ('Texas','Oklahoma','Kansas','Missouri',
+    'Arkansas','Louisiana') THEN 'Central'
+    WHEN State IN ('New York','Pennsylvania','New Jersey',
+    'Massachusetts','Virginia','Florida','Georgia',
+    'North Carolina') THEN 'East'
+    ELSE 'Other'
+  END AS Territory,
+  ROUND(SUM(Sales), 2) AS total_sales,
+  ROUND(SUM(Profit), 2) AS total_profit,
+  ROUND(AVG(Net_Margin_pct), 2) AS avg_margin,
+  ROUND(AVG("Shipping Cost Per Unit"), 2) AS avg_shipping,
+  ROUND(AVG(CAST(Conversion_Flag AS FLOAT))*100, 2) 
+  AS conversion_pct,
+  COUNT("Order ID") AS total_orders
+FROM retail
+GROUP BY Territory
+ORDER BY total_profit DESC
+```
+
+**Territory results:**
+
+| Territory | Total Sales | Total Profit | Avg Margin | Avg Shipping | Conversion |
+|---|---|---|---|---|---|
+| West | $665K | $108K | 23.76% | $6.61 | 84.59% |
+| East | $756K | $98K | 16.81% | $3.94 | 95.53% |
+| Other | $638K | $86K | 8.98% | $5.96 | 94.04% |
+| Central | $235K | **-$7,397** | -19.9% | $9.16 | 95.98% |
+
+**Key insight:** Central territory has 96% conversion but is the only territory losing money — -$7,397 total profit on $235K sales. The culprit is $9.16 average shipping cost, more than double East's $3.94.
+
+---
+
+## Python Analysis (Google Colab)
+
+Verified and extended the SQL findings using Python:
+```python
+import pandas as pd
+
+df = pd.read_csv('retail_shipping_sample.csv')
+
+# margin from raw figures
+df['Net_Margin_calc'] = (df['Profit'] / df['Sales']) * 100
+
+# low margin orders
+df['Low_Margin_Flag'] = df['Net_Margin_calc'] < 10
+
+print(f"Total orders: {len(df)}")
+print(f"Low margin orders: {df['Low_Margin_Flag'].sum()}")
+print(f"Percentage: {df['Low_Margin_Flag'].mean()*100:.1f}%")
+```
+
+**Output:**
+- Total orders: 9,994
+- Low margin orders: 2,934
+- Percentage: **29.4% of all orders are below 10% margin**
+
+---
+
+## Automation (n8n + Make.com)
+
+Built automated workflows to monitor low margin orders without manual intervention:
+
+**n8n workflow:**
+- Schedule trigger → Google Sheets (reads 9,995 rows) → IF condition (margin < 10%) → Gmail alert
+- Automatically flags low margin orders daily and notifies the responsible team
+
+**Make.com workflow:**
+- Schedule trigger → Google Sheets → Filter (margin < 10%) → Loop each row → Gmail alert
+- Processes each flagged row individually with order-level detail in the email
+
+**Business value:** A manager receives automatic daily alerts about underperforming orders without opening a single spreadsheet — enabling faster pricing and cost decisions.
+
+---
+
+## Excel Analysis
+
+Built a PivotTable in Excel summarising average margin by state with conditional formatting:
+Red — states below 10% margin
+Green — states above 30% margin
+
+**Problem states flagged:** Texas, Illinois, Colorado, Pennsylvania, Ohio, Arizona, Oregon, Florida, Tennessee, North Carolina, Wyoming
+
 ## Files
 
 - `retail_shipping_sample.csv` — merged dataset (9,995 rows)
