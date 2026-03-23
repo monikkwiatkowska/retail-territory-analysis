@@ -220,13 +220,14 @@ Automatically flags low margin orders daily and notifies the responsible team
 ![n8n workflow](n8n-workflow.png)
 
 **Error handling workflow:**
-![Error handler workflow](error-workflow.png)
 
 **Error handling:** A separate error workflow monitors 
 the main flow — if Google Sheets is unavailable or 
 Slack fails, an automatic alert fires to #margin-alerts 
 with the error details and timestamp. This ensures the 
 pipeline never fails silently.
+
+![Error handler workflow](error-workflow.png)
 
 **Make.com workflow:**
 Schedule trigger → Google Sheets → Filter (margin < 10%) → Loop each row → Gmail alert
