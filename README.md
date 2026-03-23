@@ -217,7 +217,7 @@ Built automated workflows to monitor low margin orders without manual interventi
 **n8n workflow:**
 - Schedule trigger → Google Sheets (reads 9,995 rows) → IF condition (margin < 10%) → Gmail alert
 - Automatically flags low margin orders daily and notifies the responsible team
-- ![n8n workflow](n8n-workflow.png)
+![n8n workflow](n8n-workflow.png)
 
 **Error handling workflow:**
 ![Error handler workflow](error workflow.png)
@@ -228,13 +228,10 @@ Slack fails, an automatic alert fires to #margin-alerts
 with the error details and timestamp. This ensures the 
 pipeline never fails silently.
 
-<img width="337" height="134" alt="image" src="https://github.com/user-attachments/assets/348aeeb4-bd18-4364-bdc8-190ddef7f923" />
-
-
 **Make.com workflow:**
 - Schedule trigger → Google Sheets → Filter (margin < 10%) → Loop each row → Gmail alert
 - Processes each flagged row individually with order-level detail in the email
-- ![Make.com workflow](make-workflow.png)
+![Make.com workflow](make-workflow.png)
 
 **Business value:** A manager receives automatic daily alerts about underperforming orders without opening a single spreadsheet — enabling faster pricing and cost decisions.
 
