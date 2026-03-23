@@ -1,4 +1,4 @@
-# Retail Territory Margin Analysis | SQL
+<img width="337" height="134" alt="image" src="https://github.com/user-attachments/assets/3d65d92b-f6b7-4d15-a823-c8dab5f25bb8" /># Retail Territory Margin Analysis | SQL
 
 **Tools:** SQL (SQLite) | **Dataset:** 9,995 orders across US states | **Focus:** Territory profitability & margin risk
 
@@ -227,6 +227,9 @@ the main flow — if Google Sheets is unavailable or
 Slack fails, an automatic alert fires to #margin-alerts 
 with the error details and timestamp. This ensures the 
 pipeline never fails silently.
+
+<img width="337" height="134" alt="image" src="https://github.com/user-attachments/assets/348aeeb4-bd18-4364-bdc8-190ddef7f923" />
+
 
 **Make.com workflow:**
 - Schedule trigger → Google Sheets → Filter (margin < 10%) → Loop each row → Gmail alert
