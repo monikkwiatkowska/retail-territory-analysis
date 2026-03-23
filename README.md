@@ -1,4 +1,4 @@
-<img width="337" height="134" alt="image" src="https://github.com/user-attachments/assets/3d65d92b-f6b7-4d15-a823-c8dab5f25bb8" /># Retail Territory Margin Analysis | SQL
+# Retail Territory Margin Analysis | SQL
 
 **Tools:** SQL (SQLite) | **Dataset:** 9,995 orders across US states | **Focus:** Territory profitability & margin risk
 
