@@ -220,7 +220,7 @@ Built automated workflows to monitor low margin orders without manual interventi
 ![n8n workflow](n8n-workflow.png)
 
 **Error handling workflow:**
-![Error handler workflow](error workflow.png)
+![Error handler workflow](error-workflow.png)
 
 **Error handling:** A separate error workflow monitors 
 the main flow — if Google Sheets is unavailable or 
