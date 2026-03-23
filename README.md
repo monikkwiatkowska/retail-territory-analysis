@@ -226,6 +226,9 @@ Built automated workflows to monitor low margin orders without manual interventi
 
 **Business value:** A manager receives automatic daily alerts about underperforming orders without opening a single spreadsheet — enabling faster pricing and cost decisions.
 
+**n8n workflow file:** `slack workflow.json` 
+— import directly into n8n to replicate this automation
+
 ---
 
 ## Excel Analysis
