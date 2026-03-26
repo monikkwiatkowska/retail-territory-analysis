@@ -1,4 +1,4 @@
-# Retail Territory Margin Analysis | SQL
+# Retail Territory Margin Analysis | SQL, Excel, Automation 
 
 **Tools:** SQL (SQLite) | **Dataset:** 9,995 orders across US states | **Focus:** Territory profitability & margin risk
 
